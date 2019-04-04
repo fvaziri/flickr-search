@@ -69,7 +69,8 @@ def fetchPhotos(flickr, **kwargs):
 socket.setdefaulttimeout(5)
 
 argparser = argparse.ArgumentParser()
-argparser.add_argument("api_key", help="instagram access-token", type=str)
+argparser.add_argument("api_key", help="Flickr API key", type=str)
+argparser.add_argument("secret", help="Flickr Secret key", type=str)
 argparser.add_argument("lon_min", help="bounding box minimum longitude", type=float)
 argparser.add_argument("lon_max", help="bounding box maximum longitude", type=float)
 argparser.add_argument("lat_min", help="bounding box minimum latitude", type=float)
@@ -81,7 +82,7 @@ argparser.add_argument("output", help="location of output file", type=str)
 argparser.add_argument("-a", help="also retrieve all photos outside of the bbox of users within the result set", action="store_true")
 args = argparser.parse_args()	
 
-flickr = flickrapi.FlickrAPI(args.api_key, cache=False)
+flickr = flickrapi.FlickrAPI(args.api_key, args.secret, cache=False))
 bbox_string = str(args.lon_min) + ',' + str(args.lat_min) + ',' + str(args.lon_max) + ',' + str(args.lat_max)
 
 t_min = parser.parse(args.t_min)
